@@ -2,6 +2,16 @@
 
 class Toro
 {
+    protected static $tokens = array(
+        ':string' => '([a-zA-Z]+)',
+        ':number' => '([0-9]+)',
+        ':alpha'  => '([a-zA-Z0-9-_]+)'
+    );
+
+    public static function addToken($key, $token) {
+        self::$tokens[$key] = $token;
+    }
+
     public static function serve($routes)
     {
         ToroHook::fire('before_request', compact('routes'));
@@ -25,13 +35,8 @@ class Toro
         if (isset($routes[$path_info])) {
             $discovered_handler = $routes[$path_info];
         } elseif ($routes) {
-            $tokens = array(
-                ':string' => '([a-zA-Z]+)',
-                ':number' => '([0-9]+)',
-                ':alpha'  => '([a-zA-Z0-9-_]+)'
-            );
             foreach ($routes as $pattern => $handler_name) {
-                $pattern = strtr($pattern, $tokens);
+                $pattern = strtr($pattern, self::$tokens);
                 if (preg_match('#^/?' . $pattern . '/?$#', $path_info, $matches)) {
                     $discovered_handler = $handler_name;
                     $regex_matches = $matches;
