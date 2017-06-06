@@ -46,6 +46,12 @@
             "name": "Jason Mooberry",
             "homepage": "http://jasonmooberry.com/",
             "role": "Developer"
+        },
+        {
+            "name": "Dawid Wengrzik",
+            "email": "dawid.wengrzik@xonite.pl",
+            "homepage": "http://xonite.pl/",
+            "role": "Developer"
         }
     ],
     "require": {
