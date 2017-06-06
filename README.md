@@ -3,10 +3,11 @@
 Toro is a PHP router for developing RESTful web applications and APIs. It is
 designed for minimalists who want to get work done.
 
+This repository is a fork of abandoned original ToroPHP with further improvements and breaking compatibility changes.
+
 ## Quick Links
 
-- [Official Website](http://toroweb.org)
-- [Changelog](https://github.com/anandkunal/ToroPHP/wiki/Changelog)
+- [Original Changelog](https://github.com/anandkunal/ToroPHP/wiki/Changelog)
 - [Design Goals](https://github.com/anandkunal/ToroPHP/wiki/Design-Goals)
 
 
@@ -74,6 +75,7 @@ Toro::serve(array(
     "/manufacturer/([a-zA-Z]+)" => "ManufacturerHandler"
 ));
 ```
+You can add your own route stubs using `addToken($key, $token)` static function before calling `Toro::serve`.
 
 Pattern matches are passed in order as arguments to the handler's request
 method. In the case of `ProductHandler` above:
@@ -97,8 +99,8 @@ class ProductHandler {
 class ExampleHandler {
     function get() {}
     function post() {}
-    function get_xhr() {}
-    function post_xhr() {}
+    function getXHR() {}
+    function postXHR() {}
 }
 ```
 
@@ -107,8 +109,8 @@ From the above, you can see two emergent patterns.
 1. Methods named after the HTTP request method (`GET`, `POST`, `PUT`,
    `DELETE`) are automatically called.
 
-2. Appending `_xhr` to a handler method automatically matches
-   JSON/`XMLHTTPRequest` requests. If the `_xhr` method is not implemented,
+2. Appending `XHR` to a handler method automatically matches
+   JSON/`XMLHTTPRequest` requests. If the `XHR` method is not implemented,
    then the given HTTP request method is called as a fallback.
 
 
@@ -248,6 +250,7 @@ location / {
   [John Kurkowski](http://about.me/john.kurkowski) for bug fixes and patches
 - [Danillo César de O. Melo](https://github.com/danillos/fire_event/blob/master/Event.php) for `ToroHook`
 - [Jason Mooberry](http://jasonmooberry.com) for code optimizations and feedback
+- [Dawid Wengrzik](http://github.com/xitro) for updates on this fork
 
 Contributions to Toro are welcome via pull requests.
 
